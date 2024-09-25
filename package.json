@@ -27,6 +27,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.0.35",
+    "@clerk/nextjs": "^5.4.1",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-checkbox": "^1.1.1",
@@ -42,6 +44,7 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@t3-oss/env-nextjs": "^0.11.1",
     "@tanstack/react-query": "^5.51.24",
     "@tanstack/react-table": "^8.20.1",
     "class-variance-authority": "^0.7.0",
@@ -51,7 +54,7 @@
     "patch-package": "^8.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.52.2",
+    "react-hook-form": "^7.53.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8",

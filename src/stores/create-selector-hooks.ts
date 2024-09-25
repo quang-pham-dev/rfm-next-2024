@@ -11,14 +11,16 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 export function createSelectorsHooks<StateType extends object>(
   store: UseBoundStore<StoreApi<StateType>> | StoreApi<StateType>,
 ) {
-  const storeIn = store as any
+  const storeIn: UseBoundStore<StoreApi<StateType>> | StoreApi<StateType> =
+    store
 
-  Object.keys(storeIn.getState()).forEach(key => {
+  Object.keys(storeIn.getState()).forEach((key: string) => {
     const selector = (state: StateType) => state[key as keyof StateType]
-    storeIn[`use${capitalize(key)}`] =
+    ;(storeIn as unknown as Record<string, unknown>)[`use${capitalize(key)}`] =
       typeof storeIn === 'function'
-        ? () => storeIn(selector)
-        : () => useStore(storeIn, selector as any)
+        ? () => (storeIn as UseBoundStore<StoreApi<StateType>>)(selector)
+        : () =>
+            useStore(storeIn as UseBoundStore<StoreApi<StateType>>, selector)
   })
 
   return storeIn as UseBoundStore<StoreApi<StateType>> &
