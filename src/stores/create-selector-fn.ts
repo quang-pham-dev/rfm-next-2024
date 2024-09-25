@@ -8,19 +8,22 @@ export interface ZustandFuncSelectors<StateType> {
 
 export function createSelectorFunctions<StateType extends object>(
   store: UseBoundStore<StoreApi<StateType>> | StoreApi<StateType>,
-) {
-  const storeIn = store as any
+): UseBoundStore<StoreApi<StateType>> & ZustandFuncSelectors<StateType> {
+  const storeIn: UseBoundStore<StoreApi<StateType>> | StoreApi<StateType> =
+    store
 
-  storeIn.use = {}
+  const use: ZustandFuncSelectors<StateType>['use'] =
+    {} as ZustandFuncSelectors<StateType>['use']
 
-  Object.keys(storeIn.getState()).forEach(key => {
+  Object.keys(storeIn.getState()).forEach((key: string) => {
     const selector = (state: StateType) => state[key as keyof StateType]
-    storeIn.use[key] =
+    use[key as keyof StateType] =
       typeof storeIn === 'function'
-        ? () => storeIn(selector)
-        : () => useStore(storeIn, selector as any)
+        ? () => (storeIn as UseBoundStore<StoreApi<StateType>>)(selector)
+        : () =>
+            useStore(storeIn as UseBoundStore<StoreApi<StateType>>, selector)
   })
 
-  return store as UseBoundStore<StoreApi<StateType>> &
+  return Object.assign(store, { use }) as UseBoundStore<StoreApi<StateType>> &
     ZustandFuncSelectors<StateType>
 }
