@@ -29,13 +29,14 @@ module.exports = {
     {
       files: ['**/*.ts', '**/*.tsx'],
       rules: {
-        'react/jsx-uses-react': 'off',
-        'react/react-in-jsx-scope': 'off',
-        'react/prop-types': 'off',
-        'no-undef': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
-        '@typescript-eslint/no-explicit-any': 0,
-        'react/display-name': 'off',
+        'react/jsx-uses-react': 0,
+        'react/react-in-jsx-scope': 0,
+        'react/prop-types': 0,
+        'no-undef': 0,
+        '@typescript-eslint/no-var-requires': 0,
+        '@typescript-eslint/no-explicit-any': 'warn',
+        'react/display-name': 0,
+        'react/no-unescaped-entities': 0,
         'prettier/prettier': [
           'warn',
           {
