@@ -11,8 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: yarn install
+
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
+
+      - name: Run tests
+        run: yarn test
 
       - name: Deploy to Vercel
         env:
